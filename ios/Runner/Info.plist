@@ -51,5 +51,12 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+<string>Ваш опис для NSLocationAlwaysUsageDescription</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Ваш опис для NSLocationWhenInUseUsageDescription</string>
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>Ваш опис для NSLocationAlwaysAndWhenInUseUsageDescription</string>
+
 </dict>
 </plist>

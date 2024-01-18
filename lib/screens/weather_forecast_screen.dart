@@ -3,7 +3,7 @@ import 'package:weathear_app/api/weather_api.dart';
 import 'package:weathear_app/models/weather_forecast_daily.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weathear_app/screens/city_screen.dart';
-import 'package:weathear_app/utilities/location.dart';
+
 import 'package:weathear_app/widgets/buttom_list_view.dart';
 import 'package:weathear_app/widgets/city_view.dart';
 
@@ -11,8 +11,8 @@ import '../widgets/detail_view.dart';
 import '../widgets/temp_view.dart';
 
 class WeatherForecastScreen extends StatefulWidget {
-  late final locationWeather;
-  WeatherForecastScreen({this.locationWeather});
+  late WeatherForecast locationWeather;
+  WeatherForecastScreen({required this.locationWeather});
   @override
   State<WeatherForecastScreen> createState() => _WeatherForecastScreenState();
 }
@@ -30,9 +30,9 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
       forecastObject = WeatherApi().fetchWeatherForecast(cityName: _cityName);
     }
 
-    // forecastObject.then((weather) {
-    //   print(weather.list?[0].weather[0].main);
-    // });
+    forecastObject.then((weather) {
+      print(weather.list?[0].weather[0].main);
+    });
   }
 
   @override
@@ -40,13 +40,13 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
-        title: Text(
+        title: const Text(
           'Weather APP',
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.my_location, color: Colors.white),
+          icon: const Icon(Icons.my_location, color: Colors.white),
           onPressed: () {
             setState(() {
               forecastObject = WeatherApi()
@@ -64,12 +64,12 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
               if (tappedName != null) {
                 setState(() {
                   _cityName = tappedName;
-                  forecastObject =
-                      WeatherApi().fetchWeatherForecast(cityName: _cityName);
+                  forecastObject = WeatherApi()
+                      .fetchWeatherForecast(cityName: _cityName, isCity: true);
                 });
               }
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.location_city,
               color: Colors.white,
             ),
@@ -85,22 +85,22 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                 if (snapshot.hasData) {
                   return Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       ),
                       CityView(snapshot: snapshot),
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       ),
                       TempView(snapshot: snapshot),
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
                       DetailView(snapshot: snapshot),
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
                       BottomListView(snapshot: snapshot),
                     ],
                   );
                 } else {
-                  return Center(
+                  return const Center(
                     child: SpinKitDoubleBounce(
                       color: Colors.black,
                       size: 100,

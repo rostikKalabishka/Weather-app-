@@ -6,6 +6,7 @@ class CityScreen extends StatefulWidget {
 }
 
 class _CityScreenState extends State<CityScreen> {
+  final textController = TextEditingController();
   late String cityName;
   @override
   Widget build(BuildContext context) {
@@ -16,10 +17,11 @@ class _CityScreenState extends State<CityScreen> {
             children: [
               Container(
                 child: Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: TextField(
+                    controller: textController,
                     cursorColor: Colors.black87,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       hintText: 'Enter City Name',
                       hintStyle: TextStyle(color: Colors.white),
@@ -49,6 +51,7 @@ class _CityScreenState extends State<CityScreen> {
                     style: TextStyle(fontSize: 30, color: Colors.black87),
                   ),
                   onPressed: () {
+                    cityName = textController.text;
                     Navigator.pop(context, cityName);
                   })
             ],
